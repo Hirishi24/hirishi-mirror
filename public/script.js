@@ -16,7 +16,7 @@ form.addEventListener('submit', async (event) => {
   if (!text) return;
 
   try {
-    await fetch('/add', {
+    await fetch('https://myapp-backend.onrender.com/all', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
@@ -31,7 +31,7 @@ form.addEventListener('submit', async (event) => {
 
 async function loadEntries() {
   try {
-    const response = await fetch('/all');
+    const response = await fetch('https://myapp-backend.onrender.com/all');
     if (!response.ok) throw new Error('Request failed');
     const entries = await response.json();
     renderEntries(entries);
@@ -81,7 +81,7 @@ loadEntries();
 // Discover who this browser is (userId is stored server-side in an HttpOnly cookie).
 (async function identify() {
   try {
-    const res = await fetch('/whoami');
+    const res = await fetch('https://myapp-backend.onrender.com/all');
     if (!res.ok) throw new Error('Failed to resolve user');
     const { userId } = await res.json();
     youAre.textContent = `You are: ${userId}`;
