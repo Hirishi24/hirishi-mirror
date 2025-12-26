@@ -1,0 +1,167 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hirishi Mirror</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #00c6b3;
+      --accent-2: #f5a524;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Manrope', sans-serif;
+      background: radial-gradient(120% 120% at 10% 20%, rgba(0,198,179,0.15), transparent),
+                  radial-gradient(120% 120% at 80% 0%, rgba(245,165,36,0.12), transparent),
+                  var(--bg);
+      color: var(--text);
+      padding: 48px 16px;
+      display: flex;
+      justify-content: center;
+    }
+    .shell {
+      width: min(1100px, 100%);
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.35);
+    }
+    header {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(0,198,179,0.12);
+    }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 0.02em;
+    }
+    .lede {
+      margin: 0 0 12px 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .id-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(0,198,179,0.08);
+      color: var(--text);
+      font-weight: 700;
+      border: 1px solid rgba(0,198,179,0.2);
+      margin-bottom: 16px;
+    }
+    .stack {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1221;
+      color: var(--text);
+      font-size: 15px;
+    }
+    input[type="text"]:focus {
+      outline: 2px solid rgba(0,198,179,0.4);
+      border-color: rgba(0,198,179,0.5);
+    }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b1221;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: 0 10px 30px rgba(0,198,179,0.35);
+    }
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); box-shadow: 0 6px 18px rgba(0,198,179,0.3); }
+    .error { color: #ff6b6b; margin: 6px 0 0 0; min-height: 20px; }
+    h2 { margin: 0 0 8px 0; font-size: 18px; letter-spacing: 0.01em; }
+    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    li {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1221;
+      display: grid;
+      gap: 6px;
+    }
+    .text { font-weight: 700; }
+    .meta { color: var(--muted); font-size: 13px; display: flex; gap: 12px; }
+    .meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .pill { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="dot"></div>
+      <div>
+        <h1>Hirishi Mirror</h1>
+        <p class="lede">Drop quick notes, see them sync instantly. Server persists every post with timestamps.</p>
+      </div>
+    </header>
+
+    <div id="you-are" class="id-banner">Resolving your user id…</div>
+
+    <div class="stack">
+      <div class="panel">
+        <form id="entry-form">
+          <input id="text-input" type="text" name="text" placeholder="Type something bold…" required />
+          <button type="submit">Post</button>
+        </form>
+        <div id="error" class="error" role="alert"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Timeline (newest first)</h2>
+        <ul id="entries"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+  <script src="script.js"></script>
+</body>
+</html>
