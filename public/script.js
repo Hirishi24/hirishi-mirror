@@ -2,6 +2,7 @@
 // POST /add sends user input to the server so it can be persisted in MongoDB.
 // GET /all asks the server for the full list so the UI stays in sync with stored data.
 
+const API_BASE = 'https://hirishi-mirror-backend.onrender.com';
 const form = document.getElementById('entry-form');
 const input = document.getElementById('text-input');
 const entriesList = document.getElementById('entries');
@@ -16,9 +17,10 @@ form.addEventListener('submit', async (event) => {
   if (!text) return;
 
   try {
-    await fetch('https://myapp-backend.onrender.com/all', {
+    await fetch(API_BASE + '/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ text }),
     });
     input.value = '';
@@ -31,7 +33,7 @@ form.addEventListener('submit', async (event) => {
 
 async function loadEntries() {
   try {
-    const response = await fetch('https://myapp-backend.onrender.com/all');
+    const response = await fetch(API_BASE + '/all', { credentials: 'include' });
     if (!response.ok) throw new Error('Request failed');
     const entries = await response.json();
     renderEntries(entries);
@@ -81,7 +83,7 @@ loadEntries();
 // Discover who this browser is (userId is stored server-side in an HttpOnly cookie).
 (async function identify() {
   try {
-    const res = await fetch('https://myapp-backend.onrender.com/all');
+    const res = await fetch(API_BASE + '/whoami', { credentials: 'include' });
     if (!res.ok) throw new Error('Failed to resolve user');
     const { userId } = await res.json();
     youAre.textContent = `You are: ${userId}`;
